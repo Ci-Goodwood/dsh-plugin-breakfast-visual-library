@@ -1,0 +1,6 @@
+interface:
+  display_name: "早餐视觉组件"
+  short_description: "离线浏览与调用文字加载、转场、图标、引文、配色和地图组件，接入网页与代码动画。"
+  default_prompt: "使用 $breakfast-visual-library 为当前视觉任务查找合适组件，并接入项目。"
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,8 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Canvas 视觉组件示例</title>
+<style>body{margin:0;background:#101e24;color:#f4ead6;font:15px/1.6 system-ui,sans-serif}main{max-width:1280px;margin:auto;padding:16px}canvas{width:100%;height:auto;display:block}nav{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin:12px 0}a{color:#f4ead6}input[type=range]{width:240px}label{display:flex;gap:8px;align-items:center}p{color:#c6d0ce}#status{min-height:24px}</style>
+<main><nav><a href="demo.html">组合画面</a><a href="demo.html?view=marks">18类标记</a><label>时间<input id="time" type="range" min="0" max="6" value="1" step="0.0416666667"><output id="time-label">1.00s</output></label><label>本地图片<input id="image" type="file" accept="image/*"></label></nav>
+<canvas id="scene" width="1280" height="720" aria-label="直接用Canvas绘制的视觉组件示例"></canvas>
+<p id="status">默认内容是原创几何示意；可选本地照片取色，图片仅在本机处理。此页用于调用和时间定位演示。</p></main>
+<script src="colors.js"></script><script src="photos.js"></script><script src="frames.js"></script><script src="demo.js"></script></html>

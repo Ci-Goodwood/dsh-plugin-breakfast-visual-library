@@ -1,0 +1,1 @@
+window.VisualLibraryDistribution = {"mode": "plugin", "archives": [["README.md", "组件 API 与调用说明"], ["gallery.html?module=motion", "文字 / 加载：逐项工作台"], ["gallery.html?module=effects", "图片 / 转场：逐项工作台"], ["demo.html?view=marks", "18 类目标标记"], ["gallery.html?module=integration", "视频组合取帧示例"], ["SOURCES.md", "来源与使用条件"]]};

@@ -1,0 +1,43 @@
+{
+  "name": "dsh-plugin-breakfast-visual-library",
+  "version": "0.1.0",
+  "private": true,
+  "description": "早餐视觉实验室：可离线浏览、检索和复用的文字加载动画、图片转场、图标、引文、配色及地图组件。",
+  "type": "module",
+  "main": "./index.mjs",
+  "exports": {
+    ".": "./index.mjs",
+    "./package.json": "./package.json",
+    "./cordis.patch.yml": "./cordis.patch.yml"
+  },
+  "files": [
+    "index.mjs",
+    "cordis.patch.yml",
+    "skills/",
+    "assets/",
+    "scripts/",
+    "README.md",
+    "bundle-files.json",
+    "tests/"
+  ],
+  "engines": {
+    "node": ">=18",
+    "dsh": "^0.2.1-rc.2"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BreakfastDaPaiDang/dsh-plugin-breakfast-visual-library.git"
+  },
+  "homepage": "https://github.com/BreakfastDaPaiDang/dsh-plugin-breakfast-visual-library#readme",
+  "bugs": {
+    "url": "https://github.com/BreakfastDaPaiDang/dsh-plugin-breakfast-visual-library/issues"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.cjs skills/breakfast-visual-library/assets/visual-library/tests/*.cjs"
+  }
+}

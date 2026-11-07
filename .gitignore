@@ -1,0 +1,8 @@
+node_modules/
+.runtime/
+out/
+**/out/
+new-*/
+*.tgz
+*.log
+__pycache__/

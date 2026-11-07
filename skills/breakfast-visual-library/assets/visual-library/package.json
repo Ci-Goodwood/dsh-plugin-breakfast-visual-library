@@ -1,0 +1,8 @@
+{
+  "name": "breakfast-canvas-visual-library",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Small Canvas drawing and colour utilities; no asset downloads",
+  "scripts": { "test": "node --test", "check:browser": "node verify-browser.cjs", "check:modules": "node verify-modules.cjs", "check:contrast": "node verify-integration-contrast.cjs", "render:video": "node render-video.cjs" },
+  "engines": { "node": ">=18" }
+}
