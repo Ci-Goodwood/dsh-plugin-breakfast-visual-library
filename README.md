@@ -9,15 +9,15 @@
 把这个仓库链接交给 DSH，并说：
 
 > 安装这个视觉插件，以后处理相关视觉任务时按需使用：
-> https://github.com/BreakfastDaPaiDang/dsh-plugin-breakfast-visual-library
+> https://github.com/Ci-Goodwood/dsh-plugin-breakfast-visual-library
 
 也可以使用 **DSH Desktop 自带的 `dsh` 命令行**安装（不要混用另一个全局版本）：
 
 ```text
-dsh plugin --profile desktop add github:BreakfastDaPaiDang/dsh-plugin-breakfast-visual-library#v0.1.0
+dsh plugin --profile desktop add github:Ci-Goodwood/dsh-plugin-breakfast-visual-library#v0.1.0
 ```
 
-如果直接链接安装受本机工具限制，可下载 [v0.1.0 插件包](https://github.com/BreakfastDaPaiDang/dsh-plugin-breakfast-visual-library/releases/tag/v0.1.0)，再安装本地文件：
+如果直接链接安装受本机工具限制，可下载 [v0.1.0 插件包](https://github.com/Ci-Goodwood/dsh-plugin-breakfast-visual-library/releases/tag/v0.1.0)，再安装本地文件：
 
 ```text
 dsh plugin --profile desktop add /absolute/path/to/dsh-plugin-breakfast-visual-library-0.1.0.tgz
