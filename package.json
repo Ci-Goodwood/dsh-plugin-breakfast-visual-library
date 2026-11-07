@@ -1,6 +1,6 @@
 {
   "name": "dsh-plugin-breakfast-visual-library",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "早餐视觉实验室：可离线浏览、检索和复用的文字加载动画、图片转场、图标、引文、配色及地图组件。",
   "type": "module",

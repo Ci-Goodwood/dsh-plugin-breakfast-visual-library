@@ -12,11 +12,29 @@
 | resource / region / icons | icon-data.js, icons.js | `VisualIcons.search(query,family)` / `draw(ctx,id,t,{x,y,size,ink,accent,paper,mode})` |
 | quotes | quotes.js | `VisualQuotes.createRenderer(ctx,input,{layout,fontSize,page,transparent})` |
 | colors | colors.js, photos.js | `VisualColors` / `VisualPhotos` |
-| maps | maps.js | `VisualMaps.createRenderer(ctx,input,options)` |
+| maps | maps.js, icon-data.js, icons.js, geo-atlas.js, atlas-catalog.js, atlas-periods.js, atlas-geography.js, historical-atlas.js | 旧覆盖层 `VisualMaps`；历史定位 `HistoricalAtlas.locate/makeScene/createRenderer` |
 | styles | style-data.js, styles.js | `VisualStyles.compose(id,{language,usage,subjectZh,subjectEn,camera})` |
 | all | 全部以上脚本 | 自行按项目需求组合 |
 
-所有脚本支持 Node `require()`，其中绘图部分仍需浏览器 Canvas；读目录、检索、配色、排版模型及提示词组合可以在 Node 运行。辅助脚本 `catalog --module all` 包含展示的 315 项；`search` 返回对应模块与 ID，避免按名称猜编号。图标 ID 自带冒号，例如 `resource:oil`；不是 `oil`。
+所有脚本支持Node `require()`，其中绘图部分仍需浏览器Canvas；读目录、检索、配色、排版模型、事件定位与场景准备可在Node运行。辅助脚本 `catalog --module all` 包含展示的347项；`catalog --module maps` 包含3个基础例子及32张图版。`search` 返回对应模块与ID，避免按名称猜编号。图标ID自带冒号，例如 `resource:oil`；不是 `oil`。
+
+## 事件与历史地图
+
+`HistoricalAtlas` 自带中国、美国与北美、俄罗斯与欧亚、欧洲四个区域，32张明确标准年的政区重建、104个地名锚点与历史别名，以及17条按年段选择的主要交通走廊。自然地理不会随播放秒数变化，播放时间只控制事件图标与画面运动。
+
+```text
+node "<skill>/scripts/visual-library.cjs" map-event --region china --year 1911 --place 武昌 --event "武昌起义" --icon region:uprising --out "new-map"
+node "<skill>/scripts/visual-library.cjs" map-event --region europe --year 1789 --lon 2.35 --lat 48.86 --title "巴黎事件" --out "new-paris-map"
+node "<skill>/scripts/visual-library.cjs" scaffold --module maps --id russia-1917 --out "new-period-map"
+```
+
+输出包含自己的 `index.html`、`atlas.html`、地图工作台样式/控制器、地理数据、图标、引擎与来源文件。`index.html` 内嵌初始事件/图版参数，可以直接双击；也可使用结果中的 `atlasUrl` 带查询参数打开同一工作台。没有原插件路径或外部图瓦片依赖。`map-scene.json` 可在地图工作台导入，地图场景导出会保留事件经纬度。
+
+`window.ready` 返回 `{duration:8,fps:24,width:1600,height:960}`；`window.renderAt(t)` 暂停并绘制0—8秒指定时刻，`#scene`为取帧画布。机器输出分别包含 `eventYear` 和 `mapYear`，两者不相同则 `hidePolities:true`。不把最接近的历史截面伪装成事件当天疆界。城市级经纬度不等于遗址/车站测绘位置；未知地点或多义地名返回错误或候选，调用者应提供明确坐标。
+
+直接接入项目：`HistoricalAtlas.locate({region,year,place,title,icon})` 返回经纬度、自动候选图版及年差；`makeScene({region,period,year,events})` 准备数据；`createRenderer(ctx,input,{width,height})` 返回 `scene` 和 `renderAt(t)`。需要自定义位置时用 `coordinates:[longitude,latitude]`，坐标顺序不能颠倒。经度输入限定-180—180，内部视口支持俄罗斯日期变更线解缠。
+
+年度数据的许可、图集参考页和已知误差见 `assets/visual-library/ATLAS-SOURCES.md`、`ATLAS-DATA-LICENSE.md`。未着色陆地不表示无人/无主；1991年切片含苏联，不能当12月31日；按需保留这些图版说明。
 
 ## 帧与状态
 
@@ -36,10 +54,10 @@
 
 ## 导出与环境
 
-展示网页支持 PNG 与参数 JSON 下载；插件不需要浏览器以外的运行依赖。`catalog/search/copy/scaffold` 需要 Node.js 18+，未依赖第三方 npm 包。
+展示网页支持PNG与参数JSON下载；浏览展览只需现代浏览器。`catalog/search/copy/scaffold/map-event` 需要Node.js18+，未依赖第三方npm包。
 
 视频输出可用自带 `render-video.cjs`，取帧默认使用 `gallery.html`。设置 `VISUAL_ENTRY` 为新生成页面的绝对路径，可截图 `#scene`；不要把展示首页用作视频取帧入口。需另备 Playwright（或 `PLAYWRIGHT_MODULE` 指定已有模块）及可用浏览器；`PLAYWRIGHT_CHANNEL=msedge` 可选系统 Edge。编码需 Python、PyAV、Pillow，可用 `VISUAL_PYTHON` 指定解释器。这些是可选生产依赖，不打包浏览器/编码器二进制、不自动安装软件、不启动 GPU。
 
 ## 插件自带范围
 
-独立包保留展示页与仓库 Canvas 组件、示例和测试。旧项目的原生 PPT、历史地图、第三方图片/字体、研究截图、私人素材、隔离的用户配色均不包含。独立展示页将原来依赖本地项目的入口替换为组件说明与当前自带文件，没有失效的私人绝对路径。
+独立包保留展示页、32张开源历史重建、Canvas组件、示例与测试。图集扫描原件、旧项目的原生PPT、第三方图片/字体、研究截图、私人素材和隔离用户配色不包含。独立展示页将原来依赖本地项目的入口替换为组件说明与当前自带文件，没有失效的私人绝对路径。

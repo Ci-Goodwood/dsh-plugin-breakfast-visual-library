@@ -14,13 +14,13 @@
 也可以使用 **DSH Desktop 自带的 `dsh` 命令行**安装（不要混用另一个全局版本）：
 
 ```text
-dsh plugin --profile desktop add github:Ci-Goodwood/dsh-plugin-breakfast-visual-library#v0.1.0
+dsh plugin --profile desktop add github:Ci-Goodwood/dsh-plugin-breakfast-visual-library#v0.2.0
 ```
 
-如果直接链接安装受本机工具限制，可下载 [v0.1.0 插件包](https://github.com/Ci-Goodwood/dsh-plugin-breakfast-visual-library/releases/tag/v0.1.0)，再安装本地文件：
+如果直接链接安装受本机工具限制，可下载 [v0.2.0 插件包](https://github.com/Ci-Goodwood/dsh-plugin-breakfast-visual-library/releases/tag/v0.2.0)，再安装本地文件：
 
 ```text
-dsh plugin --profile desktop add /absolute/path/to/dsh-plugin-breakfast-visual-library-0.1.0.tgz
+dsh plugin --profile desktop add /absolute/path/to/dsh-plugin-breakfast-visual-library-0.2.0.tgz
 ```
 
 安装后查看 `dsh plugin --profile desktop list`。DSH 已运行时，保存工作后重新打开 DSH，以加载新插件。
@@ -37,10 +37,10 @@ dsh plugin --profile desktop add /absolute/path/to/dsh-plugin-breakfast-visual-l
 | 图标 | 60 个资源图标、64 个地区/事件图标；双色、单色镂空与锚点组合 |
 | 引文排版 | 9 种版式，原译对照、旁批、脚注、字幕条与长文分页 |
 | 配色与照片 | 对比度、透明叠色、面积取色、任意邻接区域分配、逐帧背景检查 |
-| 地图与组合 | 虚构分区/路线、图标锚点、组合画面；实际底图由项目提供 |
+| 历史地图与事件 | 中美俄欧32个年度截面，104个地名/历史别名锚点、17条年代化交通走廊；任意坐标放置事件图标 |
 | 风格 | 40 个命名风格与 1 个归纳 Bonus 的描述、配色及提示词 |
 
-共 **9 类、315 项可打开的展示**。打开 [`skills/breakfast-visual-library/assets/visual-library/index.html`](skills/breakfast-visual-library/assets/visual-library/index.html)：搜索、播放/暂停、时间拖动、换文字/颜色/图片、引文分页、地图输入，以及 PNG/JSON 下载都可以离线使用。
+共 **9 类、347 项可打开的展示**。打开 [`skills/breakfast-visual-library/assets/visual-library/index.html`](skills/breakfast-visual-library/assets/visual-library/index.html)：搜索、播放/暂停、时间拖动、换文字/颜色/图片、引文分页、地图输入，以及 PNG/JSON 下载都可以离线使用。
 
 ## 让 DSH 使用
 
@@ -53,6 +53,18 @@ dsh plugin --profile desktop add /absolute/path/to/dsh-plugin-breakfast-visual-l
 > 提取这张商品照片的主色，再给图片、说明和价格区域分配可读的相邻配色。
 
 技能名：`breakfast-visual-library`。入口与可读说明见 [SKILL.md](skills/breakfast-visual-library/SKILL.md)，按需加载 API 文档，不需要先把整个库塞进模型上下文。
+
+## 历史地图与事件工作台
+
+打开 [历史地图工作台](skills/breakfast-visual-library/assets/visual-library/atlas.html)，可选择中国、美国与北美、俄罗斯与欧亚、欧洲的32个历史截面，保留主城与当时已录入的道路/铁路/水路。支持城市和历史别名检索、任意经纬度、地图点击落点、全部124种图标、聚焦缩放、多事件、深色/纸本/暖色战图，以及PNG/JSON导入导出。
+
+```text
+node skills/breakfast-visual-library/scripts/visual-library.cjs map-event --region china --year 1911 --place 武昌 --event 武昌起义 --icon region:uprising --out ./new-history-demo
+```
+
+DSH生成的工作台只加载自己目录内的资源，可直接复用和逐帧渲染。未收录地名要求明确坐标，事件年与图版标准年不同会默认隐藏政区层，避免把近似年度地图说成事件当天疆界。
+
+政区数据来自 **Cliopatria / Seshat（CC BY 4.0）**，自然地理来自 **Natural Earth（公共领域）**。用户参考图集只用于核对图例/时期/城市与交通格局，扫描页不包含在包中。具体年份、改编记录和已知问题见 [地图来源说明](skills/breakfast-visual-library/assets/visual-library/ATLAS-SOURCES.md)。17条交通走廊并未穷尽四个区域的历史路网。
 
 ## 可直接调用的工具
 
@@ -75,12 +87,12 @@ npm test
 npm pack
 ```
 
-检查包含技能注册、目录完整性、真实进度、组件复制、无覆盖行为和组件单元测试，不需要下载 npm 依赖。实际发布前另在 Windows Edge 验证 315 项展览、13 种独立脚手架、乱序取帧一致性与无外部请求。跨平台浏览器表现仍需使用者在目标环境确认。
+检查包含技能注册、目录完整性、真实进度、组件复制、无覆盖行为和组件单元测试，不需要下载 npm 依赖。实际发布前另在 Windows Edge 验证 347 项展览、13 种独立脚手架、乱序取帧一致性与无外部请求。跨平台浏览器表现仍需使用者在目标环境确认。
 
 ## 范围与来源
 
-Canvas 3D/玻璃效果为简化重制，107 条配方不等于 107 套独立算法。风格项是描述与提示词，没有生成风格样片。图片机制不自动抠图或恢复深度；地图组件不自带真实疆界和历史道路。
+Canvas 3D/玻璃效果为简化重制，107 条配方不等于 107 套独立算法。风格项是描述与提示词，没有生成风格样片。图片机制不自动抠图或恢复深度；历史政区是有来源的年度研究重建，交通线为城市/走廊级示意；不能当作事件当天控制线或街道导航。
 
-私人素材、第三方照片/字体、PPT、历史地图原件、原版 CSS 编辑器、游戏纹理与隔离的用户配色未打包。来源说明和各项使用条件保留在 [SOURCES.md](skills/breakfast-visual-library/assets/visual-library/SOURCES.md)。当前未额外授予统一开源许可。
+私人素材、第三方照片/字体、PPT、历史图集扫描原件、原版 CSS 编辑器、游戏纹理与隔离的用户配色未打包。来源说明和各项使用条件保留在 [SOURCES.md](skills/breakfast-visual-library/assets/visual-library/SOURCES.md)。当前未额外授予统一开源许可。
 
 组件起源于 [早餐 AI 视频基建](https://github.com/BreakfastDaPaiDang/ai-video-infra) 的本地视觉工具。这个仓库已经自包含，克隆后无需再取得原工作区。
